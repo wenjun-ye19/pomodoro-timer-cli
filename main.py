@@ -27,7 +27,7 @@ def countdown(duration, label):
         print(f"\n{label}")
         print(f"Time remaining: {format_time(total_seconds)}")
         print("-" * 30)
-        print("Press Ctrl+C to stop early.")
+        print("Press Ctrl+C to stop...for emergency only!")
         
         time.sleep(1)
         total_seconds -= 1
@@ -38,21 +38,24 @@ def countdown(duration, label):
     print("\a") # Plays a system beep sound (optional)
 
 def main():
+    clear_screen()
     print("👋 Welcome to Wenjun's Stoic Pomodoro Timer - CLI version")
     print("Focus on what you can control: the present moment.")
+    print("-" * 40)
     
     try:
         while True:
-            # 1. Work Session
+            # 1. Start Work Session (Wait for user confirmation)
+            input("\n⏳ Press Enter to start your 25-min Focus Session...")
             countdown(WORK_TIME, MESSAGE_WORK)
             
-            # 2. Break Session
-            input("\nPress Enter to start your break...")
+            # 2. Start Break Session (Wait for user confirmation)
+            input("\n☕ Press Enter to start your 5-min Break...")
             countdown(BREAK_TIME, MESSAGE_BREAK)
             
             # 3. Loop Back
-            choice = input("\nStart another session? (y/n): ").lower()
-            if choice != 'y':
+            choice = input("\n🔄 Start another session? (Press Enter for Yes, type 'n' to quit): ").lower().strip()
+            if choice == 'n':
                 print("\n🙏 Great work today. Rest well.")
                 break
                 
