@@ -18,6 +18,18 @@ def format_time(seconds):
     secs = seconds % 60
     return f"{mins:02d}:{secs:02d}"
 
+def play_alert_sound():
+    """Plays a sound alert cross-platform."""
+    try:
+        # Windows: Use built-in winsound module
+        import winsound
+        # Frequency (Hz), Duration (ms) - A pleasant chime
+        winsound.Beep(600, 500) 
+        winsound.Beep(800, 500)
+    except ImportError:
+        # Linux/macOS: Fallback to terminal bell (might not sound on all terminals)
+        print("\a")
+
 def countdown(duration, label):
     """Runs the countdown timer with a clean UI update."""
     total_seconds = duration
@@ -35,7 +47,10 @@ def countdown(duration, label):
     # Timer finished
     clear_screen()
     print(f"\n✅ {label} Complete!")
-    print("\a") # Plays a system beep sound (optional)
+    play_alert_sound()
+    
+    # Show Visual Alert regardless of software sound capabilities
+    print("\n🔔 DING DING! Time's up!") 
 
 def main():
     clear_screen()
